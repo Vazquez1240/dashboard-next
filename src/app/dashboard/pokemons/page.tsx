@@ -1,26 +1,23 @@
-'use server'
-// 'use client'
+'use client'
 
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react"
+import {getPokemons} from "@/app/pokemons";
+import {useState, useEffect} from "react";
 
-const getPokemons = (limit = 20, offset = 0) => {
-    try {
-        const data = fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
-            // .then(res => res.json())
-        return data
-        // return fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`)
-    } catch (error) {
-        console.error(error)
-    }
-}
+export default function PokemonPage() {
+    const [pokemon, setPokemon] = useState([]);
 
-export default async function PokemonPage() {
-    'use client'
-    const pokemon =  await getPokemons()
-    {console.log(pokemon)}
+    useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPokemons(24);
+      // @ts-ignore
+        setPokemon(data);
+    };
+
+    fetchData();
+  }, []);
     return (
         <div>
-            <h1>{JSON.stringify(pokemon)}</h1>
+            {JSON.stringify(pokemon)}
         </div>
     )
 }
