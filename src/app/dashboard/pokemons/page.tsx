@@ -23,6 +23,7 @@ export default function PokemonPage() {
                                 <Image
                                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
                                     key={poke.id}
+                                    style={{cursor: 'pointer'}}
                                     width={100}
                                     height={100}
                                     alt={poke.name}/>
